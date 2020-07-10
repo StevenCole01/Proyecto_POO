@@ -1,7 +1,10 @@
 import javax.swing.*;
+
+import sun.net.www.content.text.plain;
+
 import java.awt.event.*;
 
-public class VentanaDuckHunt extends JFrame implements ActionListener
+public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListener
 {
    
     JLayeredPane paneles;
@@ -42,6 +45,8 @@ public class VentanaDuckHunt extends JFrame implements ActionListener
         this.setResizable(false);
         this.setLocationRelativeTo(null); //colocando la ventana en el medio
 
+        this.addKeyListener(this);
+
         this.add(paneles);
         panelCarga.setVisible(true);
         
@@ -64,22 +69,62 @@ public class VentanaDuckHunt extends JFrame implements ActionListener
         panelFinal.setVisible(false);*/ 
         
         panelInicio.btnJugar.addActionListener(this);
-        panelJuego.btnRegresar.addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == panelInicio.btnJugar)
         {
+            this.requestFocus();
             panelInicio.setVisible(false);
             panelJuego.setVisible(true);
-                      
-        }
-
-        else if (e.getSource() == panelJuego.btnRegresar)
-        {            
-            panelJuego.setVisible(false);
-            panelInicio.setVisible(true);
+            panelJuego.hiloPatos.start(); 
+            panelJuego.hiloCazadora.start();          
         }
     }
+
+    public void keyPressed(KeyEvent e)
+	{	
+        
+        if (e.getKeyCode() == 65 &&  panelJuego.cazadora.getPermitirMov() == true)//A
+        {
+            panelJuego.cazadora.setFlagMovIzquierda(true);
+            panelJuego.cazadora.setMovimiento("Izquierda");
+        }
+        else if(e.getKeyCode() == 68 && panelJuego.cazadora.getPermitirMov() == true)//D
+        {
+            panelJuego.cazadora.setFlagMovDerecha(true);
+            panelJuego.cazadora.setMovimiento("Derecha");
+        }	
+
+	}
+
+	public void keyReleased(KeyEvent e)
+	{
+        if (e.getKeyCode() == 65)
+        {
+            panelJuego.cazadora.setFlagMovIzquierda(false);
+            panelJuego.cazadora.setMovimiento("Neutral");
+        }
+        else if(e.getKeyCode() == 68)
+        {
+            panelJuego.cazadora.setFlagMovDerecha(false);
+            panelJuego.cazadora.setMovimiento("Neutral");            
+        }
+        else if (e.getKeyCode() == 10)
+        {
+            System.out.println("tecla");
+            panelJuego.cazadora.setPermitirMov(false);
+            panelJuego.cazadora.setMovimiento("Disparo");            
+            
+        }	
+
+	}
+
+    public void keyTyped(KeyEvent e)
+    {
+        
+       
+    }
+    
 }

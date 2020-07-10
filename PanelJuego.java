@@ -11,14 +11,14 @@ public class PanelJuego extends JPanel
     */
     JLabel lblPuntos;  
 
-    JButton btnRegresar;
-
     public Cazadora cazadora;
-    public Pato[] arregloPatos;
+    public Pato[] arregloPatosDerecha;
+    public Pato[] arregloPatosIzquierda;
     public Zorro zorro;
     public Jabali jabali;
 
-    HiloMovientoPatos hiloPatos;
+    public HiloMovientoPatos hiloPatos;
+    public HiloMovimientoCazadora hiloCazadora;
     
     //Logo_DuckHunt(Negro)
     public PanelJuego() 
@@ -27,16 +27,22 @@ public class PanelJuego extends JPanel
         cazadora.setLocation(600, 720);
         this.add(cazadora);
 
-        arregloPatos = new Pato[8];
+        arregloPatosDerecha = new Pato[8];
         for (int i=0; i<8; i++)
         {
-            arregloPatos[i] = new Pato();
-            arregloPatos[i].setLocation(i*150, 500);
-            this.add(arregloPatos[i]);
+            arregloPatosDerecha[i] = new Pato("Derecha");
+            arregloPatosDerecha[i].setLocation(i*150, 400);
+            this.add(arregloPatosDerecha[i]);
         }
-        /*pato = new Pato();
-        pato.setLocation(700, 700);
-        this.add(pato);*/
+        
+        arregloPatosIzquierda = new Pato[8];
+        for (int i=0; i<8; i++)
+        {
+            arregloPatosIzquierda[i] = new Pato("Izquierda");
+            arregloPatosIzquierda[i].setLocation(i*150, 500);
+            this.add(arregloPatosIzquierda[i]);
+        }
+        
 
         zorro = new Zorro();
         zorro.setLocation(400, 700);
@@ -47,9 +53,8 @@ public class PanelJuego extends JPanel
         this.add(jabali);
 
         this.setLayout(null);
-        this.btnRegresar = new JButton("regresar");
-        this.btnRegresar.setBounds(400,400,100,50);
-        this.add(btnRegresar);
+
+        creandoHilos();
 
     }
 
@@ -67,7 +72,8 @@ public class PanelJuego extends JPanel
 
     public void creandoHilos()
     {
-        hiloPatos = new HiloMovientoPatos(this.arregloPatos)
+        hiloPatos = new HiloMovientoPatos(this.arregloPatosDerecha, this.arregloPatosIzquierda);
+        hiloCazadora = new HiloMovimientoCazadora(cazadora);
     }
 }
 
