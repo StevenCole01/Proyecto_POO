@@ -14,11 +14,16 @@ public class PanelJuego extends JPanel
     public Cazadora cazadora;
     public Pato[] arregloPatosDerecha;
     public Pato[] arregloPatosIzquierda;
-    public Zorro zorro;
-    public Jabali jabali;
+    public Lobo loboDerecha, loboIzquierda;
+    public Zorro zorroDerecha, zorroIzquierda;
+    public Jabali jabaliDerecha, jabaliIzquierda;
+    public Bala bala;
+    
 
     public HiloMovientoPatos hiloPatos;
     public HiloMovimientoCazadora hiloCazadora;
+    public HiloDisparo hiloDisparo;
+    public HiloMovimientoEnemigos hiloEnemigos;
     
     //Logo_DuckHunt(Negro)
     public PanelJuego() 
@@ -42,15 +47,36 @@ public class PanelJuego extends JPanel
             arregloPatosIzquierda[i].setLocation(i*150, 500);
             this.add(arregloPatosIzquierda[i]);
         }
+
+        loboDerecha = new Lobo("Derecha");
+        loboDerecha.setLocation(-200,730);
+        this.add(loboDerecha);        
         
+        loboIzquierda = new Lobo("Izquierda");
+        loboIzquierda.setLocation(1600,730);
+        this.add(loboIzquierda);        
 
-        zorro = new Zorro();
-        zorro.setLocation(400, 700);
-        this.add(zorro);
+        zorroDerecha = new Zorro("Derecha");
+        zorroDerecha.setLocation(-200,730);
+        this.add(zorroDerecha);
+         
+        zorroIzquierda = new Zorro("Izquierda");
+        zorroIzquierda.setLocation(1600, 730);
+        this.add(zorroIzquierda);
 
-        jabali = new Jabali();
-        jabali.setLocation(200, 700);
-        this.add(jabali);
+        jabaliDerecha = new Jabali("Derecha");
+        jabaliDerecha.setLocation(-200, 730);
+        this.add(jabaliDerecha);
+
+        jabaliIzquierda = new Jabali("Izquierda");
+        jabaliIzquierda.setLocation(1600, 730);
+        this.add(jabaliIzquierda);
+
+
+        bala = new Bala();
+        bala.setLocation(750,1000);
+        bala.setVisible(false);
+        this.add(bala);
 
         this.setLayout(null);
 
@@ -74,6 +100,8 @@ public class PanelJuego extends JPanel
     {
         hiloPatos = new HiloMovientoPatos(this.arregloPatosDerecha, this.arregloPatosIzquierda);
         hiloCazadora = new HiloMovimientoCazadora(cazadora);
+        hiloDisparo = new HiloDisparo(bala, cazadora);
+        hiloEnemigos = new HiloMovimientoEnemigos(loboDerecha,loboIzquierda,zorroDerecha,zorroIzquierda,jabaliDerecha,jabaliIzquierda);
     }
 }
 

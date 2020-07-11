@@ -1,7 +1,4 @@
 import javax.swing.*;
-
-import sun.net.www.content.text.plain;
-
 import java.awt.event.*;
 
 public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListener
@@ -79,7 +76,9 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
             panelInicio.setVisible(false);
             panelJuego.setVisible(true);
             panelJuego.hiloPatos.start(); 
-            panelJuego.hiloCazadora.start();          
+            panelJuego.hiloCazadora.start();
+            panelJuego.hiloDisparo.start();
+            panelJuego.hiloEnemigos.start();          
         }
     }
 
@@ -113,7 +112,6 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
         }
         else if (e.getKeyCode() == 10)
         {
-            System.out.println("tecla");
             panelJuego.cazadora.setPermitirMov(false);
             panelJuego.cazadora.setMovimiento("Disparo");            
             
@@ -122,9 +120,6 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
 	}
 
     public void keyTyped(KeyEvent e)
-    {
-        
-       
-    }
+    {}
     
 }

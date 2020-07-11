@@ -19,11 +19,11 @@ public class Bala extends JLabel
             System.out.println(e);
         }
         
-        this.setSize(15, 15);
+        this.setSize(60, 60);
     }
     public void paintComponent(Graphics g)
 	{
 		super.paintComponent(g);
-		g.drawImage(sprite,0,0,15,15,null);
+		g.drawImage(sprite,0,0,60,60,null);
 	}
 }
