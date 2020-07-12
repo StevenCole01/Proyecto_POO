@@ -4,14 +4,14 @@ public class HiloMovientoPatos extends Thread implements Runnable
 {
 
     private boolean detener;
-    Pato[] arregloPatosDerecha;
-    Pato[] arregloPatosIzquierda;
-    int xIzq = 0;
+    private Pato[] arregloPatosDerecha;
+    private Pato[] arregloPatosIzquierda;
+    private int xIzq = 0;
+    
+    private Bala bala;
 
-    Bala bala;
-
-    HiloCaidaDelPato hiloCaidaDerecha;//se declara el hilo caida
-    HiloCaidaDelPato hiloCaidaIzquierda;
+    private HiloCaidaDelPato hiloCaidaDerecha;//se declara el hilo caida
+    private HiloCaidaDelPato hiloCaidaIzquierda;
 
     public HiloMovientoPatos(Pato[] arregloPatosDerecha, Pato[] arregloPatosIzquierda, Bala bala, HiloCaidaDelPato hiloCaidaDerecha, HiloCaidaDelPato hiloCaidaIzquierda)
     {
@@ -59,12 +59,14 @@ public class HiloMovientoPatos extends Thread implements Runnable
                 {
                     arregloPatosIzquierda[i].cambiarSubSprite();
                 }
-
                 //arregloTroncos[i].setLocation(x+separacionTroncos*i,y[i]);
             }
            
             checkCollision();
             retardo(4);
+            if (detener == true)
+            {break;}
+
           }
           for (int i = 0; i < 8; i++)
           {
@@ -72,8 +74,7 @@ public class HiloMovientoPatos extends Thread implements Runnable
               arregloPatosIzquierda[i].setVisible(true);
           }
         }
-        while(detener == false);
-        
+        while(detener == false); 
     }
 
     public void detenerHilo()
@@ -117,7 +118,6 @@ public class HiloMovientoPatos extends Thread implements Runnable
 			}catch(Exception e){
 				System.out.println("Error: al ejecutar el sleep");
 			}
-
     }
 
     public void checkCollision()
@@ -126,20 +126,20 @@ public class HiloMovientoPatos extends Thread implements Runnable
         {
             if (arregloPatosDerecha[i].getBounds().intersects(bala.getBounds()))
             {
-               arregloPatosDerecha[i].setVisible(false);
-               hiloCaidaDerecha.setCoordenadas((int) arregloPatosDerecha[i].getLocation().getX(), (int) arregloPatosDerecha[i].getLocation().getY());
-               //obtiene corrdenadas del pato que choco para iniciar la caida en el mismo lugar
-               hiloCaidaDerecha.activarCaida();//activa la caida cambiando una variable booleana a "true"
-               break;
+                arregloPatosDerecha[i].setVisible(false);
+                hiloCaidaDerecha.setCoordenadas((int) arregloPatosDerecha[i].getLocation().getX(), (int) arregloPatosDerecha[i].getLocation().getY());
+                //obtiene corrdenadas del pato que choco para iniciar la caida en el mismo lugar
+                hiloCaidaDerecha.activarCaida();//activa la caida cambiando una variable booleana a "true"
+                break;
             }
 
             if (arregloPatosIzquierda[i].getBounds().intersects(bala.getBounds()))
             {
-               arregloPatosIzquierda[i].setVisible(false);//*******
-               hiloCaidaIzquierda.setCoordenadas((int) arregloPatosIzquierda[i].getLocation().getX(), (int) arregloPatosIzquierda[i].getLocation().getY());
-               //obtiene corrdenadas del pato que choco para iniciar la caida en el mismo lugar
-               hiloCaidaIzquierda.activarCaida();//activa la caida cambiando una variable booleana a "true"
-               break;
+                arregloPatosIzquierda[i].setVisible(false);//*******
+                hiloCaidaIzquierda.setCoordenadas((int) arregloPatosIzquierda[i].getLocation().getX(), (int) arregloPatosIzquierda[i].getLocation().getY());
+                //obtiene corrdenadas del pato que choco para iniciar la caida en el mismo lugar
+                hiloCaidaIzquierda.activarCaida();//activa la caida cambiando una variable booleana a "true"
+                break;
             }
         }
     }

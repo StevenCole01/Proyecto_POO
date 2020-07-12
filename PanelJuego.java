@@ -8,8 +8,8 @@ public class PanelJuego extends JPanel
     +Enemigos
     +cazador
     +Label Puntos
-    */
-    JLabel lblPuntos;  
+    */ 
+    public JButton btnRegresar;
 
     public Cazadora cazadora;
     public Pato[] arregloPatosDerecha;
@@ -29,10 +29,20 @@ public class PanelJuego extends JPanel
     public HiloMovimientoEnemigos hiloEnemigos;
     public HiloCaidaDelPato hiloCaidaDerecha; // hilo para la caida del pato
     public HiloCaidaDelPato hiloCaidaIzquierda;
+    public HiloSaltoCazadora hiloSaltoCazadora;
+
+    private Marcador marcador;
     
     //Logo_DuckHunt(Negro)
     public PanelJuego() 
     {
+        btnRegresar = new JButton("Regresar");
+        btnRegresar.setBounds(0,100,100,50);
+        this.add(btnRegresar);
+
+        marcador = new Marcador();
+        this.add(marcador);
+        
         cazadora = new Cazadora();
         cazadora.setLocation(600, 720);
         this.add(cazadora);
@@ -92,9 +102,6 @@ public class PanelJuego extends JPanel
         this.add(patoCaidaIzquierda);
 
         this.setLayout(null);
-
-        creandoHilos();
-
     }
 
     @Override
@@ -109,14 +116,43 @@ public class PanelJuego extends JPanel
 		super.paint(g);
     }
 
-    public void creandoHilos()
+    public void empezarJuego()
     {
-        hiloCaidaIzquierda = new HiloCaidaDelPato(patoCaidaIzquierda);
-        hiloCaidaDerecha = new HiloCaidaDelPato(patoCaidaDerecha);//se crea el hilo de la animacion de caida, se le pasa el pato como parametro
+        hiloCaidaIzquierda = new HiloCaidaDelPato(patoCaidaIzquierda, marcador);
+        hiloCaidaDerecha = new HiloCaidaDelPato(patoCaidaDerecha, marcador);//se crea el hilo de la animacion de caida, se le pasa el pato como parametro
         hiloPatos = new HiloMovientoPatos(this.arregloPatosDerecha, this.arregloPatosIzquierda, bala, hiloCaidaDerecha, hiloCaidaIzquierda); //en el hilo de patos tambien se pasa el hilo de caida
         hiloCazadora = new HiloMovimientoCazadora(cazadora);
         hiloDisparo = new HiloDisparo(bala, cazadora);
         hiloEnemigos = new HiloMovimientoEnemigos(loboDerecha,loboIzquierda,zorroDerecha,zorroIzquierda,jabaliDerecha,jabaliIzquierda);
+
+        hiloPatos.start(); 
+        hiloCazadora.start();
+        hiloDisparo.start();
+        hiloEnemigos.start();  
+        hiloCaidaDerecha.start();
+        hiloCaidaIzquierda.start(); 
+
+        marcador.resetPuntuacion();
+        marcador.actualizarMarcador();
     }
+
+    public void detenerJuego()
+    {
+        hiloPatos.detenerHilo(); 
+        hiloCazadora.detenerHilo();
+        hiloDisparo.detenerHilo();
+        hiloEnemigos.detenerHilo();  
+        hiloCaidaDerecha.detenerHilo();
+        hiloCaidaIzquierda.detenerHilo();
+    }
+
+    public void cazadoraSaltar()
+    {
+        hiloSaltoCazadora = new HiloSaltoCazadora(cazadora);
+        if(cazadora.getPermitirMov() == true && cazadora.getSaltando() == false)
+        {
+            hiloSaltoCazadora.start();
+        }
+    }  
 }
 

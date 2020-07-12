@@ -19,6 +19,7 @@ public class Cazadora extends JLabel{
 
     private String movimiento; //Neutral,Izquierda,Derecha,Disparo
     private boolean permitirMov; 
+    private boolean saltando;
 
     public Cazadora()
     {
@@ -39,6 +40,7 @@ public class Cazadora extends JLabel{
         movimiento = "Neutral";
         numSumSprite = 1;
         permitirMov = true;
+        saltando = false;
     }
 
     public void paintComponent(Graphics g)
@@ -175,6 +177,16 @@ public class Cazadora extends JLabel{
     public void setPermitirMov(boolean permitirMov)
     {
         this.permitirMov = permitirMov;
+    }
+
+    public boolean getSaltando()
+    {
+        return this.saltando;
+    }
+
+    public void setSaltando(boolean saltando)
+    {
+        this.saltando = saltando;
     }
 
     

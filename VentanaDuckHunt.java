@@ -58,7 +58,6 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
         panelCarga.setVisible(false);       
 
         panelInicio.setVisible(true);
-    
        
        /* this.add(panelJuego);
         panelJuego.setVisible(false);
@@ -66,6 +65,7 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
         panelFinal.setVisible(false);*/ 
         
         panelInicio.btnJugar.addActionListener(this);
+        panelJuego.btnRegresar.addActionListener(this);
     }
     
     public void actionPerformed(ActionEvent e)
@@ -75,12 +75,14 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
             this.requestFocus();
             panelInicio.setVisible(false);
             panelJuego.setVisible(true);
-            panelJuego.hiloPatos.start(); 
-            panelJuego.hiloCazadora.start();
-            panelJuego.hiloDisparo.start();
-            panelJuego.hiloEnemigos.start();  
-            panelJuego.hiloCaidaDerecha.start();
-            panelJuego.hiloCaidaIzquierda.start();     
+            panelJuego.empezarJuego(); 
+        }
+
+        if (e.getSource() == panelJuego.btnRegresar)
+        {
+            panelJuego.setVisible(false);
+            panelInicio.setVisible(true);
+            panelJuego.detenerJuego();
         }
     }
 
@@ -96,6 +98,10 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
         {
             panelJuego.cazadora.setFlagMovDerecha(true);
             panelJuego.cazadora.setMovimiento("Derecha");
+        }
+        else if (e.getKeyCode() == 32)
+        {
+           panelJuego.cazadoraSaltar();
         }	
 
 	}
@@ -116,10 +122,8 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
         {
             panelJuego.cazadora.setPermitirMov(false);
             panelJuego.cazadora.setMovimiento("Disparo");
-                       
-            
         }	
-
+        
 	}
 
     public void keyTyped(KeyEvent e)
