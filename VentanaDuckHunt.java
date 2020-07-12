@@ -78,7 +78,9 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
             panelJuego.hiloPatos.start(); 
             panelJuego.hiloCazadora.start();
             panelJuego.hiloDisparo.start();
-            panelJuego.hiloEnemigos.start();          
+            panelJuego.hiloEnemigos.start();  
+            panelJuego.hiloCaidaDerecha.start();
+            panelJuego.hiloCaidaIzquierda.start();     
         }
     }
 
@@ -113,7 +115,8 @@ public class VentanaDuckHunt extends JFrame implements ActionListener , KeyListe
         else if (e.getKeyCode() == 10)
         {
             panelJuego.cazadora.setPermitirMov(false);
-            panelJuego.cazadora.setMovimiento("Disparo");            
+            panelJuego.cazadora.setMovimiento("Disparo");
+                       
             
         }	
 

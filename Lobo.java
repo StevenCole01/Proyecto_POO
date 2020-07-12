@@ -42,7 +42,7 @@ public class Lobo extends JLabel
     
     public void cambiarSubSprite()
     {
-        this.setVisible(false);
+        //this.setVisible(false);
         if (direccion == "Derecha")
         {
             switch (numSumSprite)
@@ -104,7 +104,7 @@ public class Lobo extends JLabel
                 break;
             }
         }
-        this.setVisible(true);
+        //this.setVisible(true);
     }
 
     public String getDireccion()

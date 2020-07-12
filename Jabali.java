@@ -43,7 +43,7 @@ public class Jabali extends JLabel
     
     public void cambiarSubSprite()
     {
-        this.setVisible(false);
+        //this.setVisible(false);
         if (direccion == "Derecha")
         {
             switch (numSumSprite)
@@ -80,7 +80,7 @@ public class Jabali extends JLabel
                 break;
             }
         }
-        this.setVisible(true);
+        //this.setVisible(true);
     }
 
     public String getDireccion()

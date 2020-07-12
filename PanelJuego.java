@@ -18,12 +18,17 @@ public class PanelJuego extends JPanel
     public Zorro zorroDerecha, zorroIzquierda;
     public Jabali jabaliDerecha, jabaliIzquierda;
     public Bala bala;
+
+    public Pato patoCaidaDerecha; //Se crea el pato para animar la caida
+    public Pato patoCaidaIzquierda;
     
 
     public HiloMovientoPatos hiloPatos;
     public HiloMovimientoCazadora hiloCazadora;
     public HiloDisparo hiloDisparo;
     public HiloMovimientoEnemigos hiloEnemigos;
+    public HiloCaidaDelPato hiloCaidaDerecha; // hilo para la caida del pato
+    public HiloCaidaDelPato hiloCaidaIzquierda;
     
     //Logo_DuckHunt(Negro)
     public PanelJuego() 
@@ -78,6 +83,14 @@ public class PanelJuego extends JPanel
         bala.setVisible(false);
         this.add(bala);
 
+        //iniciar el pato para la caida y se agrega a este panel
+        patoCaidaDerecha = new Pato("Impacto");
+        patoCaidaDerecha.setLocation(750,1000);
+        this.add(patoCaidaDerecha);
+        patoCaidaIzquierda = new Pato("Izquierda");//*******************
+        patoCaidaIzquierda.setLocation(750,1000);
+        this.add(patoCaidaIzquierda);
+
         this.setLayout(null);
 
         creandoHilos();
@@ -98,7 +111,9 @@ public class PanelJuego extends JPanel
 
     public void creandoHilos()
     {
-        hiloPatos = new HiloMovientoPatos(this.arregloPatosDerecha, this.arregloPatosIzquierda);
+        hiloCaidaIzquierda = new HiloCaidaDelPato(patoCaidaIzquierda);
+        hiloCaidaDerecha = new HiloCaidaDelPato(patoCaidaDerecha);//se crea el hilo de la animacion de caida, se le pasa el pato como parametro
+        hiloPatos = new HiloMovientoPatos(this.arregloPatosDerecha, this.arregloPatosIzquierda, bala, hiloCaidaDerecha, hiloCaidaIzquierda); //en el hilo de patos tambien se pasa el hilo de caida
         hiloCazadora = new HiloMovimientoCazadora(cazadora);
         hiloDisparo = new HiloDisparo(bala, cazadora);
         hiloEnemigos = new HiloMovimientoEnemigos(loboDerecha,loboIzquierda,zorroDerecha,zorroIzquierda,jabaliDerecha,jabaliIzquierda);

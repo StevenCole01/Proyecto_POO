@@ -13,7 +13,7 @@ public class Pato extends JLabel
     private final int ancho = 120;
 
     
-    private final String direccion; //Iquierda o Derecha
+    private String direccion; //Iquierda o Derecha
     private int numSumSprite;
     private int posVariableY;
     private int trayectoria; //Ecuacion    
@@ -112,6 +112,23 @@ public class Pato extends JLabel
     public int getTrayectoria()
     {
         return this.trayectoria;
+    }
+
+    public void setDireccion(String direccion)
+    {
+        this.direccion = direccion;
+    }
+
+    public void spriteCaida(String caida)
+    {
+        if (caida == "Impacto")
+        {
+            this.subSprite = this.sprite.getSubimage(0,72,36,36);
+        }
+        else if (caida == "Caida")
+        {
+            this.subSprite = this.sprite.getSubimage(36,72,36,36);
+        }
     }
 
 }

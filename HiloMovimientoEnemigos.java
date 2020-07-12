@@ -37,11 +37,11 @@ public class HiloMovimientoEnemigos extends Thread implements Runnable
                         {
                             loboDerecha.setLocation(x,(int) loboDerecha.getLocation().getY());
                             
-                            if ((x%10) == 0)//Aleteo de patos
+                            if ((x%20) == 0)//Aleteo de patos
                             {
                                 loboDerecha.cambiarSubSprite();
                             }
-                            retardo(5);
+                            retardo(3);
                             /* if(loboDerecha.intersects(cazadora.getLocation()) == true)
                             {
                                 break;
@@ -55,11 +55,11 @@ public class HiloMovimientoEnemigos extends Thread implements Runnable
                         {
                             loboIzquierda.setLocation(x,(int) loboIzquierda.getLocation().getY());
                             
-                            if ((x%10) == 0)//Aleteo de patos
+                            if ((x%20) == 0)//Aleteo de patos
                             {
                                 loboIzquierda.cambiarSubSprite();
                             }
-                            retardo(5);
+                            retardo(3);
                             /* if(loboDerecha.intersects(cazadora.getLocation()) == true)
                             {
                                 break;
@@ -73,11 +73,11 @@ public class HiloMovimientoEnemigos extends Thread implements Runnable
                             {
                                 zorroDerecha.setLocation(x,(int) zorroDerecha.getLocation().getY());
                                 
-                                if ((x%10) == 0)//Aleteo de patos
+                                if ((x%20) == 0)//Aleteo de patos
                                 {
                                     zorroDerecha.cambiarSubSprite();
                                 }
-                                retardo(5);
+                                retardo(3);
                                 /* if(loboDerecha.intersects(cazadora.getLocation()) == true)
                                 {
                                     break;
@@ -91,11 +91,11 @@ public class HiloMovimientoEnemigos extends Thread implements Runnable
                             {
                                 zorroIzquierda.setLocation(x,(int) zorroIzquierda.getLocation().getY());
                                 
-                                if ((x%10) == 0)//Aleteo de patos
+                                if ((x%20) == 0)//Aleteo de patos
                                 {
                                     zorroIzquierda.cambiarSubSprite();
                                 }
-                                retardo(5);
+                                retardo(3);
                                 /* if(loboDerecha.intersects(cazadora.getLocation()) == true)
                                 {
                                     break;
@@ -109,11 +109,11 @@ public class HiloMovimientoEnemigos extends Thread implements Runnable
                             {
                                 jabaliDerecha.setLocation(x,(int) jabaliDerecha.getLocation().getY());
                                 
-                                if ((x%10) == 0)//Aleteo de patos
+                                if ((x%20) == 0)//Aleteo de patos
                                 {
                                     jabaliDerecha.cambiarSubSprite();
                                 }
-                                retardo(5);
+                                retardo(3);
                                 /* if(loboDerecha.intersects(cazadora.getLocation()) == true)
                                 {
                                     break;
@@ -127,11 +127,11 @@ public class HiloMovimientoEnemigos extends Thread implements Runnable
                             {
                                 jabaliIzquierda.setLocation(x,(int) jabaliIzquierda.getLocation().getY());
                                 
-                                if ((x%10) == 0)//Aleteo de patos
+                                if ((x%20) == 0)//Aleteo de patos
                                 {
                                     jabaliIzquierda.cambiarSubSprite();
                                 }
-                                retardo(5);
+                                retardo(3);
                                 /* if(loboDerecha.intersects(cazadora.getLocation()) == true)
                                 {
                                     break;
