@@ -24,10 +24,6 @@ class ReproductorEfectos
             ruta = "./Recursos/Efectos_Sonido/Quack.wav";
             break;
 
-            /*case "Disparo":
-            ruta = "./Recursos/Efectos_Sonido/Disparp";
-            break;*/
-
             default:
             ruta ="";
             break;
@@ -50,7 +46,7 @@ class ReproductorEfectos
                 clip = AudioSystem.getClip();
                 clip.open(audioInput);
                 clip.start();
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
+                clip.loop(0);
             }
             else
             {
@@ -66,5 +62,6 @@ class ReproductorEfectos
         clip.stop();
     }
 
+   
 	
 }

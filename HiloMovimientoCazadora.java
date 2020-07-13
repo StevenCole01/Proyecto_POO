@@ -24,7 +24,7 @@ class HiloMovimientoCazadora extends Thread implements Runnable
     public void run()
     {
         permitirMovSprite = 0;
-
+        detener = false;
         do
         {
             if(cazadora.getPermitirMov() == true)

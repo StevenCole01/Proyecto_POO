@@ -21,6 +21,8 @@ public class Cazadora extends JLabel{
     private boolean permitirMov; 
     private boolean saltando;
 
+    private boolean colisionado;
+
     public Cazadora()
     {
        try
@@ -41,6 +43,7 @@ public class Cazadora extends JLabel{
         numSumSprite = 1;
         permitirMov = true;
         saltando = false;
+        colisionado = false;
     }
 
     public void paintComponent(Graphics g)
@@ -187,6 +190,16 @@ public class Cazadora extends JLabel{
     public void setSaltando(boolean saltando)
     {
         this.saltando = saltando;
+    }
+
+    public boolean getColisionado()
+    {
+        return this.colisionado;
+    }
+
+    public void setColisionado(boolean colisionado)
+    {
+        this.colisionado = colisionado;
     }
 
     

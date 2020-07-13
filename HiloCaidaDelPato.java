@@ -8,12 +8,15 @@ public class HiloCaidaDelPato extends Thread implements Runnable
 
     private boolean caida;
 
+    private ReproductorEfectos sonidoPato;
+
     public HiloCaidaDelPato(Pato pato, Marcador marcador)
     {
         this.pato = pato;
         this.marcador = marcador;
         this.detenerHilo = false;
         this.caida = false;
+        this.sonidoPato = new ReproductorEfectos("Quack");
        // x =0;
         y =0;
     }
@@ -26,6 +29,7 @@ public class HiloCaidaDelPato extends Thread implements Runnable
         { 
             if (caida == true)
             { 
+                sonidoPato.playMusic();
                 marcador.agregarPuntos();
                 marcador.actualizarMarcador();
                 pato.setVisible(true);

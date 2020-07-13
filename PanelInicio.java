@@ -3,37 +3,34 @@ import java.awt.*;
 
 public class PanelInicio extends JPanel
 {
-    /*
-    + Boton jugar 
-    +Logo
-    +Boton mostrar controles
-    +Label imagen de controles
-    */
-
     public JButton btnJugar;
     public JButton btnMusicOnOff;
     public JButton btnMostrarControles;
 
-    public JLabel lblLogo;
-    public JLabel lblControles;
-
+    private JLabel lblLogo;
    
-
-
     public PanelInicio()
     {
         this.setLayout(null);
-        btnJugar = new JButton("Jugar");
-        btnJugar.setIcon(new ImageIcon("./Recursos/Botones_Logos/botonPlay.png"));
-        btnJugar.setBounds(530,500,440,160);
+        btnJugar = new JButton();
+        btnJugar.setIcon(new ImageIcon("./Recursos/Botones_Logos/botonJugar.png"));
+        btnJugar.setOpaque(false);
+        btnJugar.setBounds(556,500,388,138);
         this.add(btnJugar);
 
-        
+        btnMusicOnOff = new JButton();
+        btnMusicOnOff.setIcon(new ImageIcon("./Recursos/Botones_Logos/botonUnmute.png"));
+        btnMusicOnOff.setBounds(10,10,100,100);
+        this.add(btnMusicOnOff);
+
+        btnMostrarControles = new JButton("controles");
+        btnMostrarControles.setIcon(new ImageIcon("./Recursos/Botones_Logos/botonInstrucciones.png"));
+        btnMostrarControles.setBounds(120,10,100,100);
+        this.add(btnMostrarControles);
 
         lblLogo = new JLabel(new ImageIcon("./Recursos/Botones_Logos/Logo_DuckHunt(Negro).jpg"));
         lblLogo.setBounds(400,50,700,393);
         this.add(lblLogo);
-        
     }
 
     @Override

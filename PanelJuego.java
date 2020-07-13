@@ -3,13 +3,8 @@ import java.awt.*;
 
 public class PanelJuego extends JPanel
 {
-    /*  Panel del Juego
-    +Arreglo de Patos
-    +Enemigos
-    +cazador
-    +Label Puntos
-    */ 
-    public JButton btnRegresar;
+    public JButton btnContinuar;
+    public JLabel lblMensajeDeColision;
 
     public Cazadora cazadora;
     public Pato[] arregloPatosDerecha;
@@ -21,7 +16,6 @@ public class PanelJuego extends JPanel
 
     public Pato patoCaidaDerecha; //Se crea el pato para animar la caida
     public Pato patoCaidaIzquierda;
-    
 
     public HiloMovientoPatos hiloPatos;
     public HiloMovimientoCazadora hiloCazadora;
@@ -30,15 +24,27 @@ public class PanelJuego extends JPanel
     public HiloCaidaDelPato hiloCaidaDerecha; // hilo para la caida del pato
     public HiloCaidaDelPato hiloCaidaIzquierda;
     public HiloSaltoCazadora hiloSaltoCazadora;
+    public HiloColisionEnemigo hiloColisionEnemigo;
 
-    private Marcador marcador;
+    public Cronometro cronometro;
+
+    public Marcador marcador;
     
     //Logo_DuckHunt(Negro)
     public PanelJuego() 
     {
-        btnRegresar = new JButton("Regresar");
-        btnRegresar.setBounds(0,100,100,50);
-        this.add(btnRegresar);
+
+        btnContinuar = new JButton(new ImageIcon("./Recursos/Botones_Logos/botonContinuar.png"));
+        btnContinuar.setBounds(550,550,400,120);
+        btnContinuar.setVisible(false);
+        this.add(btnContinuar);
+
+        lblMensajeDeColision = new JLabel(new ImageIcon("./Recursos/Botones_Logos/Caceria.gif"));
+        lblMensajeDeColision.setBounds(500,150,500,378);
+        lblMensajeDeColision.setBackground(Color.BLACK);
+        lblMensajeDeColision.setOpaque(true);
+        lblMensajeDeColision.setVisible(false);
+        this.add(lblMensajeDeColision);
 
         marcador = new Marcador();
         this.add(marcador);
@@ -87,7 +93,6 @@ public class PanelJuego extends JPanel
         jabaliIzquierda.setLocation(1600, 730);
         this.add(jabaliIzquierda);
 
-
         bala = new Bala();
         bala.setLocation(750,1000);
         bala.setVisible(false);
@@ -97,7 +102,7 @@ public class PanelJuego extends JPanel
         patoCaidaDerecha = new Pato("Impacto");
         patoCaidaDerecha.setLocation(750,1000);
         this.add(patoCaidaDerecha);
-        patoCaidaIzquierda = new Pato("Izquierda");//*******************
+        patoCaidaIzquierda = new Pato("Izquierda");
         patoCaidaIzquierda.setLocation(750,1000);
         this.add(patoCaidaIzquierda);
 
@@ -118,12 +123,14 @@ public class PanelJuego extends JPanel
 
     public void empezarJuego()
     {
+        cronometro = new Cronometro();
         hiloCaidaIzquierda = new HiloCaidaDelPato(patoCaidaIzquierda, marcador);
         hiloCaidaDerecha = new HiloCaidaDelPato(patoCaidaDerecha, marcador);//se crea el hilo de la animacion de caida, se le pasa el pato como parametro
         hiloPatos = new HiloMovientoPatos(this.arregloPatosDerecha, this.arregloPatosIzquierda, bala, hiloCaidaDerecha, hiloCaidaIzquierda); //en el hilo de patos tambien se pasa el hilo de caida
         hiloCazadora = new HiloMovimientoCazadora(cazadora);
         hiloDisparo = new HiloDisparo(bala, cazadora);
         hiloEnemigos = new HiloMovimientoEnemigos(loboDerecha,loboIzquierda,zorroDerecha,zorroIzquierda,jabaliDerecha,jabaliIzquierda);
+        hiloColisionEnemigo = new HiloColisionEnemigo(loboDerecha, loboIzquierda, zorroDerecha, zorroIzquierda, jabaliDerecha, jabaliIzquierda, cazadora, hiloCazadora, hiloDisparo, hiloEnemigos, btnContinuar, lblMensajeDeColision, cronometro);
 
         hiloPatos.start(); 
         hiloCazadora.start();
@@ -131,9 +138,15 @@ public class PanelJuego extends JPanel
         hiloEnemigos.start();  
         hiloCaidaDerecha.start();
         hiloCaidaIzquierda.start(); 
+        hiloColisionEnemigo.start();
+        cronometro.start();
 
         marcador.resetPuntuacion();
         marcador.actualizarMarcador();
+
+        btnContinuar.setVisible(false);
+        lblMensajeDeColision.setVisible(false);
+        cazadora.setColisionado(false);
     }
 
     public void detenerJuego()

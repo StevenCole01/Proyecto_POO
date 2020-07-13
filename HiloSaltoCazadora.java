@@ -9,19 +9,23 @@ public class HiloSaltoCazadora extends Thread implements Runnable
 
     public void run()
     {
+        if(cazadora.getColisionado() == false)
+        {
         //int x = (int) cazadora.getLocation().getX();
-        cazadora.setSaltando(true);
-        for (int y=730; y> 500;y=y-5) 
-        {
-            cazadora.setLocation((int) cazadora.getLocation().getX(),y);
-            retardo(12);
+            cazadora.setSaltando(true);
+            for (int y=730; y> 500;y=y-5) 
+            {
+                cazadora.setLocation((int) cazadora.getLocation().getX(),y);
+                retardo(12);
+            }
+            for (int y=500; y<730; y=y+5) 
+            {
+                cazadora.setLocation((int) cazadora.getLocation().getX(),y);
+                retardo(12);
+            }
+            cazadora.setSaltando(false);
         }
-        for (int y=500; y<730; y=y+5) 
-        {
-            cazadora.setLocation((int) cazadora.getLocation().getX(),y);
-            retardo(12);
-        }
-        cazadora.setSaltando(false);
+        
     }
 
     public void retardo(int ms)

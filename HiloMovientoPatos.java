@@ -30,14 +30,7 @@ public class HiloMovientoPatos extends Thread implements Runnable
         {
             //Mover continuamente las posiciones en x, evaluarlas en las fuciones correspondientes de cada pato y segun el resultado actualizar
             //su posicion en Y
-           
-           
-          /* for(int i = 0; i < 8 ; i++)
-           {
-            arregloPatosDerecha[i].setLocation(((int) arregloPatosDerecha[i].getLocation().getX())+1,(int)arregloPatosDerecha[i].getLocation().getY());
-            arregloPatosDerecha[i].setLocation((int) arregloPatosDerecha[i].getLocation().getX(),aplicarEcuacionTrayectoria(arregloPatosDerecha[i]));            
-           }
-           */
+         
 
           for(int xDer = -6500; xDer < 1500 ; xDer=xDer+1)
           {           

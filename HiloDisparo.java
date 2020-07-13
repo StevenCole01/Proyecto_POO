@@ -6,11 +6,14 @@ public class HiloDisparo extends Thread implements Runnable
     private Cazadora cazadora;
     private int x;
 
+    private ReproductorEfectos sonidoDisparo;
+
     public HiloDisparo(Bala bala, Cazadora cazadora)
     {
         this.bala = bala;
         this.cazadora = cazadora; 
-        this.detenerHilo = false;       
+        this.detenerHilo = false;  
+        this.sonidoDisparo = new ReproductorEfectos("DisparoRecarga");     
     }
 
     @Override
@@ -21,6 +24,7 @@ public class HiloDisparo extends Thread implements Runnable
         {           
            if(cazadora.getPermitirMov() == false)
            {
+               sonidoDisparo.playMusic();
                bala.setVisible(true);
                 x = (int)cazadora.getLocation().getX();
 
